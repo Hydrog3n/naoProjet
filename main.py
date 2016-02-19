@@ -7,7 +7,6 @@ from naoqi import ALModule
 from optparse import OptionParser
 from DetectRedBallSit import RedBallDetectionModule 
 
-
 #Variables Global
 RedBallDetection = None
 memory = None
@@ -15,6 +14,7 @@ memory = None
 def standardPosition():
     postureProxy = ALProxy("ALRobotPosture")
     postureProxy.goToPosture("StandInit", 0.5)
+    
 
 def main(robotIP):
     # We need this broker to be able to construct
@@ -27,12 +27,14 @@ def main(robotIP):
        9559)       # parent broker port
 
 
+    standardPosition()
     # Warning: HumanGreeter must be a global variable
     # The name given to the constructor must be the name of the
     # variable
     global RedBallDetection
     RedBallDetection = RedBallDetectionModule("RedBallDetection")
-
+    
+    
     try:
         while True:
             time.sleep(1)
